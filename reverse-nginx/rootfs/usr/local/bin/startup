@@ -39,11 +39,7 @@ f_log() {
 
 f_gen_sites_enabled() {
     if [ "${FRONTEND_SSL}" == "true" ]; then
-        if [ "${FRONTEND_LE}" == "true" ]; then
-            template_sites=/nginx/sites-enabled/template_ssl_le
-        else
-            template_sites=/nginx/sites-enabled/template_ssl
-        fi
+        template_sites=/nginx/sites-enabled/template_ssl
     else
         template_sites=/nginx/sites-enabled/template
     fi

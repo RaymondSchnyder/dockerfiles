@@ -12,13 +12,16 @@ server {
   server_name <frontend_domain>;
   index index.html index.php index.htm;
 
-  include /nginx/conf.d/ssl_self.conf;
+  ssl_certificate /nginx/ssl/certificates/<frontend_domain>.crt;
+  ssl_certificate_key /nginx/ssl/certificates/<frontend_domain>.key;
+  ssl_trusted_certificate /nginx/ssl/certificates/<frontend_domain>.chain.pem;
+  include /nginx/conf.d/ssl.conf;
   include /nginx/conf.d/headers.conf;
 
   include /nginx/path.d/<frontend_domain>/*.conf;
 
   location ~ /\.well-known/acme-challenge {
-    root /nginx/www/letsencrypt;
+    root /nginx/www/<frontend_domain>;
     allow all;
   }
 }
