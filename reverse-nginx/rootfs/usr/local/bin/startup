@@ -99,13 +99,25 @@ f_gen_certs() {
     fi
 }
 
+
+
 f_make_conf() {
+
+    FRONTEND_DOMAIN=mydomain.local
+    FRONTEND_MAX_BODY_SIZE=200M
+    FRONTEND_SSLTYPE=ec384
+    BACKEND_PORT=8080
+    FRONTEND_PATH=""
+    FRONTEND_SSL=false
+    FRONTEND_LE=false
+
     container_name=$1
     IFS=$'\n' 
     if [ "${CONTAINER_LABELS}" != "" ]; then
         for label in ${CONTAINER_LABELS}; do
             case "$(echo ${label} | awk '{print $1}')" in
                 "reverse.frontend.domain")
+                    FRONTEND_DOMAIN=""
                     FRONTEND_DOMAIN="$(echo ${label} | awk '{print $2}')"
                 ;;
                 "reverse.frontend.path")
@@ -123,15 +135,12 @@ f_make_conf() {
                 "reverse.frontend.ssl")
                     FRONTEND_SSL="$(echo ${label} | awk '{print $2}')"
                 ;;
-                "reverse.frontend.le")
-                    FRONTEND_LE="$(echo ${label} | awk '{print $2}')"
-                ;;
                 "reverse.backend.port")
                     BACKEND_PORT="$(echo ${label} | awk '{print $2}')"
                 ;;
             esac
         done
-        f_log INF "Generate files for ${FRONTEND_DOMAIN}, with path=${FRONTEND_PATH}"
+        f_log INF "Generate files for ${FRONTEND_DOMAIN}, with path=${FRONTEND_PATH}, auth=${FRONTEND_AUTH}, ssl_type=${FRONTEND_SSLTYPE}, ssl=${FRONTEND_SSL} and port=${BACKEND_PORT}"
         f_gen_location ${container_name}
         f_gen_sites_enabled
         f_gen_certs ${container_name}
