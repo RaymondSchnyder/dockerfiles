@@ -8,14 +8,6 @@ CGREEN="${CSI}1;32m"
 CYELLOW="${CSI}1;33m"
 CBLUE="${CSI}1;34m"
 
-FRONTEND_DOMAIN=mydomain.local
-FRONTEND_MAX_BODY_SIZE=200M
-FRONTEND_SSLTYPE=ec384
-BACKEND_PORT=8080
-FRONTEND_PATH=""
-FRONTEND_SSL=false
-FRONTEND_LE=false
-
 ## Functions
 f_log() {
     LOG_TYPE=$1
@@ -60,7 +52,7 @@ f_gen_location() {
         auth_file=/nginx/auth/${FRONTEND_DOMAIN}/${FRONTEND_PATH}.auth
     fi
     if [ ! -e ${path_file} ]; then
-        if [ -n ${FRONTEND_AUTH} ]; then
+        if [ ${FRONTEND_AUTH} != "" ]; then
             mkdir -p /nginx/auth/${FRONTEND_DOMAIN}
             sed -e 's|<frontend_domain_max_body_size>|'${FRONTEND_MAX_BODY_SIZE}'|' \
                 -e 's|<backend_addr>|'${container_name}'|' \
@@ -105,7 +97,7 @@ f_make_conf() {
     BACKEND_PORT=8080
     FRONTEND_PATH=""
     FRONTEND_SSL=false
-    FRONTEND_LE=false
+    FRONTEND_AUTH=""
 
     container_name=$1
     IFS=$'\n' 
