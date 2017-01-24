@@ -52,7 +52,7 @@ f_gen_location() {
         auth_file=/nginx/auth/${FRONTEND_DOMAIN}/${FRONTEND_PATH}.auth
     fi
     if [ ! -e ${path_file} ]; then
-        if [ ${FRONTEND_AUTH} != "" ]; then
+        if [ "${FRONTEND_AUTH}" != "" ]; then
             mkdir -p /nginx/auth/${FRONTEND_DOMAIN}
             sed -e 's|<frontend_domain_max_body_size>|'${FRONTEND_MAX_BODY_SIZE}'|' \
                 -e 's|<backend_addr>|'${container_name}'|' \
@@ -95,7 +95,7 @@ f_make_conf() {
     FRONTEND_MAX_BODY_SIZE=200M
     FRONTEND_SSLTYPE=ec384
     BACKEND_PORT=8080
-    FRONTEND_PATH=""
+    FRONTEND_PATH="/"
     FRONTEND_SSL=false
     FRONTEND_AUTH=""
 

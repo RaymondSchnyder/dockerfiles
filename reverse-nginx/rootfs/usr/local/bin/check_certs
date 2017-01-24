@@ -26,28 +26,30 @@ f_log() {
     esac
 }
 
-f_check_le() {
+f_check_certs() {
     LIST_DOMAINS=$(ls /nginx/ssl/certificates | grep .crt)
 
     for domain in ${LIST_DOMAINS}; do 
         CERTFILE=/nginx/ssl/certificates/${domain}.cert.pem
         KEYFILE=/nginx/ssl/certificates/${domain}.key
         CHAINFILE=/nginx/ssl/certificates/${domain}.chain.pem
-        FULLCHAINFILE=/nginx/ssl/certificates/${domain}.
+        FULLCHAINFILE=/nginx/ssl/certificates/${domain}.crt
         
         mkdir -p /nginx/www/${domain}
         if openssl x509 -checkend 864000 -noout -in "${FULLCHAINFILE}"; then
             f_log INF "Certificate is good for another 10 days!"
         else
             f_log INF "Generate New Certificate for ${domain}"
-            /usr/local/bin/lego -a -m ${EMAIL} --domain ${domain} --path /nginx/ssl --webroot /nginx/www/${domain} revoke
+            /usr/local/bin/lego -a -m ${EMAIL} -d ${domain} --path /nginx/ssl --webroot /nginx/www/${domain} revoke
             if [ $? == 0 ]; then
                 rm -rf /nginx/ssl/certificates/${domain}.*
-                /usr/local/bin/lego -a -m ${EMAIL} --domain ${domain} --path /nginx/ssl --webroot /nginx/www/${domain} --key ${FRONTEND_SSLTYPE} run
-                if [ $? == 0 ]; then 
-                    head -$(grep -n "END CERTIFICATE" ${FULLCHAINFILE} | head -1 | cut -d: -f1) ${FULLCHAINFILE} > ${CERTFILE}
-                    tail -$(($(wc -l ${FULLCHAINFILE} | awk '{print $1}')-$(grep -n "END CERTIFICATE" ${FULLCHAINFILE} | head -1 | cut -d: -f1))) ${FULLCHAINFILE} > ${CHAINFILE}
-                    f_log INF "New Certificate for ${domain} generated" 
+                /usr/local/bin/lego -a -m ${EMAIL} -d ${domain} --path /nginx/ssl --webroot /nginx/www/${domain} -k ${FRONTEND_SSLTYPE} run
+                if [ $? == 0 ]; then
+                    if [ -e ${FULLCHAINFILE} ]; then
+                        head -$(grep -n "END CERTIFICATE" ${FULLCHAINFILE} | head -1 | cut -d: -f1) ${FULLCHAINFILE} > ${CERTFILE}
+                        tail -$(($(wc -l ${FULLCHAINFILE} | awk '{print $1}')-$(grep -n "END CERTIFICATE" ${FULLCHAINFILE} | head -1 | cut -d: -f1))) ${FULLCHAINFILE} > ${CHAINFILE}
+                        f_log INF "New Certificate for ${domain} generated" 
+                    fi
                 else 
                     f_log ERR "New Certificate for ${domain} not generated"
                 fi
@@ -58,4 +60,4 @@ f_check_le() {
     done
 }
 
-f_check_le
+f_check_certs

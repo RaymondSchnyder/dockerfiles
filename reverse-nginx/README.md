@@ -48,12 +48,19 @@ docker build -t xataz/reverse-nginx --build-arg NGINX_VER=1.9.5 github.com/xataz
 * 8443
 
 ## Usage
+### Environments
+| Variable | Description | default | value |
+| -------- | ----------- | ------- | ----- |
+| UID | UID for launch nginx | 991 | Valid UID number |
+| GID | GID for launch nginx | 991 | Valid GID number |
+| EMAIL | email use for generate letsencrypt certificates | admin@mydomain.local | Valid address mail |
+
 ### Labels
 | Label Name | Description | default | value |
 | ---------- | ----------- | ------- | ----- |
 | reverse.frontend.domain | Domain Name for this service | mydomain.local | valid domain name |
-| reverse.frontend.path | Domain path (warning, no rewrite url) | / | valid path, without / |
-| reverse.frontend.auth | For auth basic | none | user:password |
+| reverse.frontend.path | Domain path (warning, no rewrite url) | / | valid path, with / |
+| reverse.frontend.auth | For auth basic | none | user:encryptpassword |
 | reverse.frontend.ssltype | Choose ssl type | ec384 | rsa2048, rsa4096, rsa8192, ec256 or ec384 |
 | reverse.frontend.domain\_max\_body\_size | Choose max size upload | 200M | Numeric value with unit (K,M,G,T) |
 | reverse.frontend.ssl | Generate letsencrypt certificate | false | true or false |
@@ -91,6 +98,8 @@ docker run -d \
 	-p 80:8080 \
 	-p 443:8443 \
     --name reverse \
+    -e EMAIL=me@mydomain.com \
+    -v /var/run/docker.sock:/var/run/docker.sock \
 	xataz/reverse-nginx
 ```
 
