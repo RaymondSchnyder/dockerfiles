@@ -80,8 +80,11 @@ f_gen_certs() {
         if [ ! -e ${CERTFILE} ] || [ ! -e ${KEYFILE} ] || [ ! -e ${CHAINFILE} ] || [ ! -e ${FULLCHAINFILE} ]; then
             mkdir -p /nginx/www/${FRONTEND_DOMAIN}
             /usr/local/bin/lego -a -m ${EMAIL} -d ${FRONTEND_DOMAIN} --path /nginx/ssl --http :8080 --tls :8443 -k ${FRONTEND_SSLTYPE} run
-            head -$(grep -n "END CERTIFICATE" ${FULLCHAINFILE} | head -1 | cut -d: -f1) ${FULLCHAINFILE} > ${CERTFILE}
-            tail -$(($(wc -l ${FULLCHAINFILE} | awk '{print $1}')-$(grep -n "END CERTIFICATE" ${FULLCHAINFILE} | head -1 | cut -d: -f1))) ${FULLCHAINFILE} > ${CHAINFILE}
+            if [ $? == 0 ]; then
+                head -$(grep -n "END CERTIFICATE" ${FULLCHAINFILE} | head -1 | cut -d: -f1) ${FULLCHAINFILE} > ${CERTFILE}
+                tail -$(($(wc -l ${FULLCHAINFILE} | awk '{print $1}')-$(grep -n "END CERTIFICATE" ${FULLCHAINFILE} | head -1 | cut -d: -f1))) ${FULLCHAINFILE} > ${CHAINFILE}
+                chown -R ${UID}:${GID} /nginx/ssl/
+            fi
             [[ $? == 0 ]] && f_log INF "New Certificate for ${FRONTEND_DOMAIN} generated" || f_log ERR "New Certificate for ${FRONTEND_DOMAIN} not generated"
         fi
     fi
