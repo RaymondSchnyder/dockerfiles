@@ -8,7 +8,7 @@ f_log() {
 }
 
 # Download dependencies
-docker pull xataz/alpine:3.4
+docker pull xataz/alpine:3.5
 
 # Build rtorrent-rutorrent
 f_log INF "Build xataz/rtorrent-rutorrent:latest ..."
