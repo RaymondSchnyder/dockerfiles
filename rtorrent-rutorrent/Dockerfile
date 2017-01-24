@@ -14,7 +14,7 @@ ENV UID=991 \
 
 LABEL Description="rutorrent based on alpine" \
       tags="latest" \
-      build_ver="2017011501"
+      build_ver="2017012401"
 
 RUN export BUILD_DEPS="build-base \
                         git \
@@ -27,31 +27,31 @@ RUN export BUILD_DEPS="build-base \
                         libressl-dev \
                         ncurses-dev \
                         curl-dev" \
-    && echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk add -U ${BUILD_DEPS} \
                 ffmpeg \
                 ca-certificates \
-                curl \
                 gzip \
                 zip \
                 unrar \
+                curl \
+                c-ares \
                 s6 \
                 geoip \
                 su-exec \
                 nginx \
-                php7@commuedge \
-                php7-fpm@commuedge \
-                php7-json@commuedge \
-                php7-opcache@commuedge \
-                php7-apcu@commuedge \
+                php7 \
+                php7-fpm \
+                php7-json \
+                php7-opcache \
+                php7-apcu \
                 libressl \
                 tar \
                 xz \
     && cd /tmp \
     && git clone https://github.com/esmil/mktorrent \
     && svn checkout http://svn.code.sf.net/p/xmlrpc-c/code/stable xmlrpc-c \
-    && git clone https://github.com/rakshasa/libtorrent.git \
-    && git clone https://github.com/rakshasa/rtorrent.git \
+    && git clone -b ${LIBTORRENT_VER} https://github.com/rakshasa/libtorrent.git \
+    && git clone -b ${RTORRENT_VER} https://github.com/rakshasa/rtorrent.git \
     && wget http://mediaarea.net/download/binary/mediainfo/${MEDIAINFO_VER}/MediaInfo_CLI_${MEDIAINFO_VER}_GNU_FromSource.tar.gz \
     && wget http://mediaarea.net/download/binary/libmediainfo0/${MEDIAINFO_VER}/MediaInfo_DLL_${MEDIAINFO_VER}_GNU_FromSource.tar.gz \
     && tar xzf MediaInfo_DLL_${MEDIAINFO_VER}_GNU_FromSource.tar.gz \
@@ -74,13 +74,11 @@ RUN export BUILD_DEPS="build-base \
     && make -j ${NB_CORES} \
     && make install \
     && cd /tmp/libtorrent \
-    && git checkout ${LIBTORRENT_VER} \
     && ./autogen.sh \
     && ./configure \
     && make -j ${BUILD_CORES-$(grep -c "processor" /proc/cpuinfo)} \
     && make install \
     && cd /tmp/rtorrent \
-    && git checkout ${RTORRENT_VER} \
     && ./autogen.sh \
     && ./configure --with-xmlrpc-c \
     && make -j ${BUILD_CORES-$(grep -c "processor" /proc/cpuinfo)} \
