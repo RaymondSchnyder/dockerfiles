@@ -27,7 +27,7 @@ RUN apk -U add \
         libressl \
         ca-certificates \
     && wget http://subsonic.org/download/subsonic-${SUBSONIC_VER}-standalone.tar.gz \
-    && tar xzvf subsonic-${VERSION}-standalone.tar.gz \
+    && tar xzvf subsonic-${SUBSONIC_VER}-standalone.tar.gz \
     && rm -f /var/cache/apk/* subsonic-${VERSION}-standalone.tar.gz
 
 COPY startup /usr/local/bin/startup
