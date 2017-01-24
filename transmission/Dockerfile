@@ -9,15 +9,16 @@ ENV UID=991 \
     GID=991 \
     WEBROOT=""
 
-RUN BUILD_DEPS="git \
-                ca-certificates" \
+RUN BUILD_DEPS="git" \
     && apk add -U transmission-daemon \
                 su-exec \
                 tini \
+                ca-certificates \
+                libressl \
                 ${BUILD_DEPS} \
     && git clone https://github.com/ronggang/transmission-web-control /tmp/webui \
-    && mkdir -p /home/transmission/.local/share/transmission/web/ \
-    && cp -R /tmp/webui/src/* /home/transmission/.local/share/transmission/web/ \
+    && mv /usr/share/transmission/web/index.html /usr/share/transmission/web/index.original.html \
+    && cp -R /tmp/webui/src/* /usr/share/transmission/web/ \
     && apk del ${BUILD_DEPS} \
     && rm -rf /var/cache/apk/* /tmp/*
 
@@ -26,10 +27,10 @@ COPY rootfs /
 RUN chmod +x /usr/local/bin/startup
 
 ARG WITH_FILEBOT=NO
-ARG FILEBOT_VER=4.7.5
+ARG FILEBOT_VER=4.7.7
 
 RUN if [ "${WITH_FILEBOT}" == "YES" ]; then \
-        apk add -U openjdk8-jre ca-certificates libressl \
+        apk add -X http://dl-cdn.alpinelinux.org/alpine/v3.4/community -U openjdk8-jre==8.111.14-r0 openjdk8-jre-base==8.111.14-r0 openjdk8-jre-lib==8.111.14-r0 \
         && mkdir /filebot \
         && cd /filebot \
         && wget http://downloads.sourceforge.net/project/filebot/filebot/FileBot_${FILEBOT_VER}/FileBot_${FILEBOT_VER}-portable.tar.xz -O /filebot/filebot.tar.xz \
