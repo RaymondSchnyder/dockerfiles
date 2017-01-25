@@ -44,7 +44,7 @@ f_gen_location() {
         mkdir -p /nginx/path.d/${FRONTEND_DOMAIN}
     fi
 
-    if [ "${FRONTEND_PATH}" == "" ]; then
+    if [ "${FRONTEND_PATH}" == "/" ]; then
         path_file=/nginx/path.d/${FRONTEND_DOMAIN}/base.conf
         auth_file=/nginx/auth/${FRONTEND_DOMAIN}/base.auth
     else
@@ -156,7 +156,8 @@ done
 f_log INF "Apply permissions"
 chown -R reverse:reverse /nginx /etc/s6.d
 chmod +x /usr/local/bin/check_certs
-find /etc/s6.d \(-name run -o -name finish\) -exec chmod +x {} \;
+find /etc/s6.d -name run -exec chmod +x {} \;
+find /etc/s6.d -name finish -exec chmod +x {} \;
 
 f_log SUC "End reverse configuration"
 
