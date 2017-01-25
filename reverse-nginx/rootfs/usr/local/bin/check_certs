@@ -27,7 +27,7 @@ f_log() {
 }
 
 f_check_certs() {
-    LIST_DOMAINS=$(ls /nginx/ssl/certificates | grep .crt)
+    LIST_DOMAINS=$(ls /nginx/ssl/certificates | grep .crt | grep -v issuer | sed 's|.crt||g')
 
     for domain in ${LIST_DOMAINS}; do 
         CERTFILE=/nginx/ssl/certificates/${domain}.cert.pem
