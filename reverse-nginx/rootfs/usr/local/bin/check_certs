@@ -36,8 +36,9 @@ f_check_certs() {
         FULLCHAINFILE=/nginx/ssl/certificates/${domain}.crt
         
         mkdir -p /nginx/www/${domain}
-        if openssl x509 -checkend 864000 -noout -in "${FULLCHAINFILE}"; then
-            f_log INF "Certificate is good for another 10 days!"
+        openssl x509 -checkend 864000 -noout -in "${FULLCHAINFILE}"
+        if [ $? == 0 ]; then
+            f_log INF "Certificate for ${domain} is good for another 10 days!"
         else
             f_log INF "Generate New Certificate for ${domain}"
             /usr/local/bin/lego -a -m ${EMAIL} -d ${domain} --path /nginx/ssl --webroot /nginx/www/${domain} revoke
