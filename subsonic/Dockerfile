@@ -39,4 +39,3 @@ EXPOSE 4040 4050
 VOLUME /data /musics /playlists /podcasts
 
 ENTRYPOINT ["/usr/local/bin/startup"]
-CMD ["java", "-Xmx256m", "-Dsubsonic.home=/data", "-Dsubsonic.host=0.0.0.0", "-Dsubsonic.port=4040", "-Dsubsonic.httpsPort=${HTTPSPORT}", "-Dsubsonic.contextPath=${WEBROOT}", "-Dsubsonic.defaultMusicFolder=${MUSICS_FOLDER}", "-Dsubsonic.defaultPodcastFolder=${PODCASTS_FOLDER}", "-Dsubsonic.defaultPlaylistFolder=${PLAYLISTS_FOLDER}", "-Djava.awt.headless=true", "-jar", "subsonic-booter-jar-with-dependencies.jar"]
