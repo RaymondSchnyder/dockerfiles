@@ -13,7 +13,6 @@ else
         -Dsubsonic.home=/data \
         -Dsubsonic.host=0.0.0.0 \
         -Dsubsonic.port=4040 \
-        -Dsubsonic.httpsPort=${HTTPSPORT} \
         -Dsubsonic.contextPath=${WEBROOT} \
         -Dsubsonic.defaultMusicFolder=${MUSICS_FOLDER} \
         -Dsubsonic.defaultPodcastFolder=${PODCASTS_FOLDER} \

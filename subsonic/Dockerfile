@@ -11,7 +11,6 @@ LABEL description="Open source media streamer" \
 
 ENV UID=991 \
     GID=991 \
-    HTTPSPORT=0 \
     WEBROOT=/ \
     MUSICS_FOLDER=/musics \
     PODCASTS_FOLDER=/podcasts \
