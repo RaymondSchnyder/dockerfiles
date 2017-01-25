@@ -155,6 +155,8 @@ done
 
 f_log INF "Apply permissions"
 chown -R reverse:reverse /nginx /etc/s6.d
+chmod +x /usr/local/bin/check_certs
+find /etc/s6.d \(-name run -o -name finish\) -exec chmod +x {} \;
 
 f_log SUC "End reverse configuration"
 
