@@ -38,7 +38,7 @@ RUN if [ "${WITH_FILEBOT}" == "YES" ]; then \
         && sed -i -e 's|"script-torrent-done-enabled": false,|"script-torrent-done-enabled": true,|' \
                 -e 's|"script-torrent-done-filename": "",|"script-torrent-done-filename": "",|' /tmp/settings.json \
         && apk del ca-certificates libressl \
-        && rm -rf /var/cache/apk/* /tmp/* /filebot/FileBot_${FILEBOT_VER}-portable.tar.xz \
+        && rm -rf /var/cache/apk/* /filebot/FileBot_${FILEBOT_VER}-portable.tar.xz \
         && chmod +x /usr/local/bin/post* \
     ;fi
 
