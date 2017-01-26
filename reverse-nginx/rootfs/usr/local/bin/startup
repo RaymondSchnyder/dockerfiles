@@ -138,6 +138,18 @@ f_make_conf() {
     fi
 }
 
+
+# Check /var/run/docker.sock
+f_log INF "Check if /var/run/docker.sock exist ..."
+ls /var/run/docker.sock > /dev/null 2>&1
+if [ $? == 0 ]; then
+    f_log INF "/var/run/docker.sock exist ..."
+else
+    f_log ERR "/var/run/docker.sock don't exist ..."
+    exit 1
+fi
+
+
 f_log INF "Start reverse configuration ..."
 
 # Prepare container
