@@ -6,7 +6,7 @@ ln -s /usr/bin/lame /data/transcode/lame
 
 chown -R $UID:$GID /data ${PLAYLISTS_FOLDER} ${PODCASTS_FOLDER} /subsonic
 
-if [ $# == 0 ]; then
+if [ $# != 0 ]; then
     exec su-exec $UID:$GID /sbin/tini -- $@
 else
     exec su-exec $UID:$GID /sbin/tini -- java -Xmx256m \
