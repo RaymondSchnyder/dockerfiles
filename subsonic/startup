@@ -10,10 +10,13 @@ if [ $# != 0 ]; then
     exec su-exec $UID:$GID /sbin/tini -- $@
 else
     exec su-exec $UID:$GID /sbin/tini -- java -Xmx256m \
-        -Dsubsonic.home=/subsonic/data \
+        -Dsubsonic.home=/config \
         -Dsubsonic.host=0.0.0.0 \
         -Dsubsonic.port=4040 \
         -Dsubsonic.contextPath=${WEBROOT} \
+        -Dsubsonic.defaultMusicFolder=${MUSICS_FOLDER} \
+        -Dsubsonic.defaultPodcastFolder=${PODCASTS_FOLDER} \
+        -Dsubsonic.defaultPlaylistFolder=${PLAYLISTS_FOLDER} \
         -Djava.awt.headless=true \
         -jar subsonic-booter-jar-with-dependencies.jar
 fi

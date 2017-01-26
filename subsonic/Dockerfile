@@ -11,7 +11,10 @@ LABEL description="Open source media streamer" \
 
 ENV UID=991 \
     GID=991 \
-    WEBROOT=/
+    WEBROOT=/ \
+    MUSICS_FOLDER=/data/musics \
+    PODCASTS_FOLDER=/data/podcasts \
+    PLAYLISTS_FOLDER=/data/playlists
 
 WORKDIR /subsonic
 
@@ -32,6 +35,6 @@ RUN chmod +x /usr/local/bin/startup
 
 EXPOSE 4040 4050
 
-VOLUME /subsonic/data
+VOLUME /data /config
 
 ENTRYPOINT ["/usr/local/bin/startup"]
