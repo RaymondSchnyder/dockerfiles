@@ -3,7 +3,7 @@ MAINTAINER xataz <https://github.com/xataz>
 
 LABEL description="sickrage based on alpine" \
       tags="latest" \
-      build_ver="2017011601"
+      build_ver="2017012601"
 
 ENV WEBROOT="/" \
     UID="991" \

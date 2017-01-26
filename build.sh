@@ -13,6 +13,9 @@ CGREEN="${CSI}1;32m"
 CYELLOW="${CSI}1;33m"
 CBLUE="${CSI}1;34m"
 
+docker pull xataz/alpine:3.5
+docker pull xataz/node:7
+
 git fetch -q "$REPO" "refs/heads/$BRANCH"
 
 for f in $(git diff HEAD~ --diff-filter=ACMRTUX --name-only | cut -d"/" -f1 | uniq); do
