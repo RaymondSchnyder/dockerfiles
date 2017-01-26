@@ -3,7 +3,7 @@ MAINTAINER xataz <https://github.com/xataz/>
 
 LABEL description="transmission based on alpine" \
       tags="latest" \
-      build_ver="2016123001"
+      build_ver="2017012601"
 
 ENV UID=991 \
     GID=991 \
@@ -16,9 +16,6 @@ RUN BUILD_DEPS="git" \
                 ca-certificates \
                 libressl \
                 ${BUILD_DEPS} \
-    && git clone https://github.com/ronggang/transmission-web-control /tmp/webui \
-    && mv /usr/share/transmission/web/index.html /usr/share/transmission/web/index.original.html \
-    && cp -R /tmp/webui/src/* /usr/share/transmission/web/ \
     && apk del ${BUILD_DEPS} \
     && rm -rf /var/cache/apk/* /tmp/*
 
