@@ -42,6 +42,7 @@ docker build -t xataz/reverse-nginx --build-arg NGINX_VER=1.9.5 github.com/xataz
 
 ### Volumes
 * /nginx/ssl : For certificate persistance
+* /nginx/custom_sites : For create your own sites
 
 ### Ports
 * 8080
