@@ -9,7 +9,7 @@ LABEL description="Monit based on alpine" \
       build_ver="2017020101"
 
 ENV USER_MONIT="monit" \
-    USER_PASSWORD="monit"
+    PASSWORD_MONIT="monit"
 
 RUN export BUILD_DEPS="wget \
                     ca-certificates \
@@ -31,6 +31,7 @@ RUN export BUILD_DEPS="wget \
                     libressl \
                     libcrypto1.0 \
                     libssl1.0 \
+                    openssl \
     && NB_CORES=${BUILD_CORES-$(grep -c "processor" /proc/cpuinfo)} \
     && cd /tmp \
     && wget https://mmonit.com/monit/dist/monit-${MONIT_VER}.tar.gz \
@@ -39,6 +40,10 @@ RUN export BUILD_DEPS="wget \
     && ./configure \
     && make -j ${NB_CORES} \
     && make install \
+    && ln -s /lib/libssl.so.39.0.0 /lib/libssl.so.1.0.0 \
+    && ln -s /lib/libssl.so.39.0.0 /usr/lib/libssl.so.1.0.0 \
+    && ln -s /lib/libcrypto.so.38.0.0 /lib/libcrypto.so.1.0.0 \
+    && ln -s /lib/libcrypto.so.38.0.0 /usr/lib/libcrypto.so.1.0.0 \
     && apk del ${BUILD_DEPS} \
     && rm -rf /tmp/* /var/cache/apk/*
     
