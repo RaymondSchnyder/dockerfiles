@@ -36,6 +36,7 @@ RUN export BUILD_DEPS="git \
                 php7-mbstring \
                 php7-iconv \
                 php7-openssl \
+                php7-zlib \
                 tar \
                 xz \
                 s6 \
