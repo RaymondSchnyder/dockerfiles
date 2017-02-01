@@ -4,9 +4,8 @@ MAINTAINER xataz <https://github.com/xataz>
 ENV UID=991 \
     GID=991 \
     WEBROOT=/ \
-    DOMAIN=www.domaine.com \
-    USERNAME=user \
-    PROTO=http
+    URI=http://www.domaine.com \
+    USERNAME=user
 
 LABEL Description="cakebox based on alpine" \
       tags="latest" \
@@ -47,6 +46,7 @@ RUN export BUILD_DEPS="git \
     && mv /tmp/composer.phar /usr/bin/composer \
     && chmod +x /usr/bin/composer \
     && cd /var/www/html/cakebox \
+    && composer install \
     && bower install --allow-root \
     && npm remove -g bower \
     && npm cache clean \
