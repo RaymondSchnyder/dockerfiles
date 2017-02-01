@@ -40,10 +40,6 @@ RUN export BUILD_DEPS="wget \
     && ./configure \
     && make -j ${NB_CORES} \
     && make install \
-    && ln -s /lib/libssl.so.39.0.0 /lib/libssl.so.1.0.0 \
-    && ln -s /lib/libssl.so.39.0.0 /usr/lib/libssl.so.1.0.0 \
-    && ln -s /lib/libcrypto.so.38.0.0 /lib/libcrypto.so.1.0.0 \
-    && ln -s /lib/libcrypto.so.38.0.0 /usr/lib/libcrypto.so.1.0.0 \
     && apk del ${BUILD_DEPS} \
     && rm -rf /tmp/* /var/cache/apk/*
     
