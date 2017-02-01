@@ -40,6 +40,7 @@ RUN export BUILD_DEPS="git \
                 tar \
                 xz \
                 s6 \
+    && ln -s /usr/bin/php7 /usr/bin/php \
     && npm install -g bower \
     && git clone https://github.com/Cakebox/Cakebox-light.git /var/www/html/cakebox \
     && cd /tmp \
@@ -52,8 +53,8 @@ RUN export BUILD_DEPS="git \
     && npm remove -g bower \
     && npm cache clean \
     && apk del ${BUILD_DEPS} \
-    && rm -rf /var/cache/apk/* /tmp/* \
-    && ln -s /usr/bin/php7 /usr/bin/php
+    && rm -rf /var/cache/apk/* /tmp/*
+    
 
 COPY rootfs /
 VOLUME /data
