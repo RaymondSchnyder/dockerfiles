@@ -42,7 +42,7 @@ RUN export BUILD_DEPS="git \
                 s6 \
     && ln -s /usr/bin/php7 /usr/bin/php \
     && npm install -g bower \
-    && git clone https://github.com/Cakebox/Cakebox-light.git /var/www/html/cakebox \
+    && git clone -b v1.8.6 https://github.com/Cakebox/Cakebox-light.git /var/www/html/cakebox \
     && cd /tmp \
     && curl -s http://getcomposer.org/installer | php7 \
     && mv /tmp/composer.phar /usr/bin/composer \
