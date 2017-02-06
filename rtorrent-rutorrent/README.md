@@ -84,9 +84,18 @@ docker run -dt -p 8080:8080 xataz/rtorrent-rutorrent
 URI access : http://XX.XX.XX.XX:8080
 
 ### Advanced launch
+Add custom plugin :
+```shell
+$ mkdir -p /docker/config/custom_plugins
+$ cd /docker/config/custom_plugins
+$ git clone https://github.com/Gyran/rutorrent-ratiocolor.git ./ratiocolor
+```
+
+Run container :
 ```shell
 docker run -dt -p 80:8080 \
 	  -v /docker/data:/data \
+	  -v /docker/config:/config \
 	  -e UID=1001 \
 	  -e GID=1001 \
     -e WEBROOT=/rutorrent \

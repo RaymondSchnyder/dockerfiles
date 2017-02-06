@@ -33,13 +33,13 @@ if [ $WEBROOT != "/" ]; then
         ln -s /config/rutorrent/share /var/www/html${WEBROOT}/share        
     fi
     ## Add custom plugins
-    [ "$(ls /config/custom_plugins/)" ] && for custom_plugin in /config/custom_plugins/*; do
+    [ "$(ls /config/custom_plugins/)" ] && for custom_plugin in $(ls /config/custom_plugins); do
         if [ ! -d /var/www/html${WEBROOT}/plugins/${custom_plugin} ]; then
             ln -s /config/custom_plugins/${custom_plugin} /var/www/html${WEBROOT}/plugins/${custom_plugin}
         fi
     done
     ## Add custom themes
-    [ "$(ls /config/custom_themes/)" ] && for custom_theme in /config/custom_themes/*; do
+    [ "$(ls /config/custom_themes/)" ] && for custom_theme in $(ls /config/custom_themes); do
         if [ ! -d /var/www/html${WEBROOT}/theme/themes/${custom_theme} ]; then
             ln -s /config/custom_themes/${custom_theme} /var/www/html${WEBROOT}/theme/themes/${custom_theme}
         fi
@@ -67,13 +67,13 @@ else
         ln -s /config/rutorrent/share /var/www/html/torrent/share        
     fi
     ## Add custom plugins
-    [ "$(ls /config/custom_plugins/)" ] && for custom_plugin in /config/custom_plugins/*; do
+    [ "$(ls /config/custom_plugins/)" ] && for custom_plugin in $(ls /config/custom_plugins); do
         if [ ! -d /var/www/html/torrent/plugins/${custom_plugin} ]; then
             ln -s /config/custom_plugins/${custom_plugin} /var/www/html/torrent/plugins/${custom_plugin}
         fi
     done
     ## Add custom themes
-    [ "$(ls /config/custom_themes/)" ] && for custom_theme in /config/custom_themes/*; do
+    [ "$(ls /config/custom_themes/)" ] && for custom_theme in $(ls /config/custom_themes); do
         if [ ! -d /var/www/html/torrent/theme/themes/${custom_theme} ]; then
             ln -s /config/custom_themes/${custom_theme} /var/www/html/torrent/theme/themes/${custom_theme}
         fi
