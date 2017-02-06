@@ -3,6 +3,17 @@
 > This image is build and push with [drone.io](https://github.com/drone/drone), a circle-ci like self-hosted.
 > If you don't trust, you can build yourself.
 
+
+## Features
+* Based on Alpine Linux.
+* rTorrent and libtorrent are compiled from source.
+* Provides by default a solid configuration.
+* Filebot is included, and creates symlinks in /data/Media.
+* No **ROOT** process.
+* Persitance custom configuration for rutorrent and rtorrent.
+* Add your own plugins and themes
+
+
 ## Tag available
 * latest [(rutorrent/latest/Dockerfile)](https://github.com/xataz/dockerfiles/blob/master/rutorrent/latest/Dockerfile)
 * latest-filebot, filebot [(rutorrent/latest-filebot/Dockerfile)](https://github.com/xataz/dockerfiles/blob/master/rutorrent/latest-filebot/Dockerfile)
@@ -22,11 +33,11 @@ rtorrent is the popular Bittorrent client.
 ## BUILD IMAGE
 ### Build arguments
 * BUILD_CORES : Number of cpu's core for compile (default : empty for use all cores)
-* MEDIAINFO_VER : Mediainfo version (default : 0.7.82)
+* MEDIAINFO_VER : Mediainfo version (default : 0.7.92.1)
 * RTORRENT_VER : rtorrent version (default : 0.9.6)
 * LIBTORRENT_VER : libtorrent version (default : 0.13.6)
 * WITH_FILEBOT : Choose if install filebot (default : no)
-* FILEBOT_VER : filebot version (default : 4.7.2)
+* FILEBOT_VER : filebot version (default : 4.7.7)
 
 ### simple build
 ```shell
@@ -44,20 +55,26 @@ docker build -t xataz/rtorrent-rutorrent:custom --build-arg WITH_FILEBOT=YES --b
 * UID : Choose uid for launch rtorrent (default : 991)
 * GID : Choose gid for launch rtorrent (default : 991)
 * WEBROOT : (default : /)
+* PORT_RTORRENT : (default : 45000)
 
 ### Volumes
 * /data : Folder for download torrents
+* /config : Folder for rtorrent and rutorrent configuration
 
 #### data Folder tree
 * /data/.watch : Rtorrent watch directory
 * /data/.session : Rtorrent save statement here
 * /data/torrents : Rtorrent download torrent here
 * /data/Media : If filebot version, rtorrent create a symlink
-* /nginx/www/html/<WEBROOT>/share/ : rutorrent configuration
+* /config/rtorrent : Path of .rtorrent.rc
+* /config/rutorrent/conf : Global configuration of rutorrent
+* /config/rutorrent/share : rutorrent user configuration and cache
+* /config/custom_plugins : Add your own plugins
+* /config/custom_themes : Add your own themes
 
 ### Ports
 * 8080
-
+* $PORT_RTORRENT
 
 ## Usage
 ### Simple launch
