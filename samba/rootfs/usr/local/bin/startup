@@ -2,49 +2,33 @@
 
 if [ -e /config/shares.conf ] && [ -e /config/users.conf ]; then
     # Generate user
-    if [ -z $CRYPT ]; then
-        for line in $(cat /config/users.conf); do
-            USERNAME=$(echo $line | cut -d: -f1)
-            PASSWORD=$(echo $line | cut -d: -f2)
-            UID=$(echo $line | cut -d: -f3)
-            GID=$(echo $line | cut -d: -f4)
-            UIDCMD=""
-            GIDCMD=""
-            if [ ! -z $UID ]; then
-                UIDCMD="-u $UID"
-            fi
-            if [ ! -z $GID ]; then
-                GIDCMD="-g $GID"
-            fi
-            echo "Add user $USERNAME"
-            adduser -D $USERNAME $UIDCMD $GIDCMD
+    # <user>:<uid>:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:<passwd>:[U          ]:LCT-<date>:
+    for line in $(cat /config/users.conf); do
+        USERNAME=$(echo $line | cut -d: -f1)
+        PASSWORD=$(echo $line | cut -d: -f2)
+        UID=$(echo $line | cut -d: -f3)
+        GID=$(echo $line | cut -d: -f4)
+        UIDCMD=""
+        GIDCMD=""
+        if [ ! -z $UID ]; then
+            UIDCMD="-u $UID"
+        fi
+        if [ ! -z $GID ]; then
+            GIDCMD="-g $GID"
+        fi
+        echo "Add user $USERNAME"
+        adduser -D $USERNAME $UIDCMD $GIDCMD
+        if [ -z $CRYPT ]; then
             touch /var/lib/samba/private/smbpasswd
             (echo $PASSWORD;echo $PASSWORD) | smbpasswd -s -a $USERNAME
-        done
-    else
-        # for generate encrypt passwd, use this command, replace <passwd> by your password :..
-        #..printf '%s' "<passwd>" | iconv -t utf16le | openssl md4 | awk '{print $2}' | tr '[:lower:]' '[:upper:]'
-        for line in $(cat /config/users.conf); do
-            # <user>:<uid>:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:<passwd>:[U          ]:LCT-<date>:
-            USERNAME=$(echo $line | cut -d: -f1)
-            PASSWORD=$(echo $line | cut -d: -f2)
-            UID=$(echo $line | cut -d: -f3)
-            GID=$(echo $line | cut -d: -f4)
-            UIDCMD=""
-            GIDCMD=""
-            if [ ! -z $UID ]; then
-                UIDCMD="-u $UID"
-            fi
-            if [ ! -z $GID ]; then
-                GIDCMD="-g $GID"
-            fi
-            echo "Add user $USERNAME"
-            adduser -D $USERNAME $UIDCMD $GIDCMD
+        else
+            # for generate encrypt passwd, use this command, replace <passwd> by your password :..
+            #..printf '%s' "<passwd>" | iconv -t utf16le | openssl md4 | awk '{print $2}' | tr '[:lower:]' '[:upper:]'
             DATE=$(echo "obase=16;$(date +%s)" | bc)
             UID_USER=$(grep ${USERNAME} /etc/passwd | cut -d: -f3)
             sed 's|<user>|'${USERNAME}'|;s|<uid>|'${UID_USER}'|;s|<passwd>|'${PASSWORD}'|;s|<date>|'${DATE}'|' /templates/smbpasswd.tmpl >> /var/lib/samba/private/smbpasswd
-        done
-    fi
+        fi
+    done
 
     for line in $(cat /config/shares.conf); do
         FOLDER=$(echo $line | cut -d: -f1)
