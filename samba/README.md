@@ -25,16 +25,16 @@ docker build -t xataz/samba github.com/xataz/dockerfiles.git#master:samba
 #### users.conf
 users.conf is a configuration file for list your users and them password :
 ```shell
-#USER:PASSWORD
-xataz:xatazpasswd
-user1:user1passwd
+#USER:PASSWORD:UID:GID
+xataz:xatazpasswd:2000:2000
+user1:user1passwd:2001:2001
 etc ...
 ```
 
 You can use environment variable CRYPT, for use users.conf with encrypt password :
 ```shell
-xataz:FAC84832FFCB741F13C5758E1319F46A
-user1:F5C8257B666CB899CC34AA3FF3771316
+xataz:FAC84832FFCB741F13C5758E1319F46A:2000:2000
+user1:F5C8257B666CB899CC34AA3FF3771316:2001:2001
 ```
 for encrypt your password on samba's format, use this command :
 ```shell
