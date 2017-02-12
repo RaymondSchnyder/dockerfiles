@@ -1,5 +1,4 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz>
 
 ENV GID=991 \
     UID=991 \
@@ -12,7 +11,8 @@ ENV GID=991 \
 
 LABEL description="lutim based on alpine" \
       tags="latest" \
-      build_ver="2017011501"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 RUN BUILD_DEPS="build-base \
                 libressl-dev \
