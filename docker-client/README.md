@@ -4,19 +4,12 @@
 > If you don't trust, you can build yourself.
 
 ## Tag available
-* latest, 1.12.0, 1.12 [(Dockerfile)](https://github.com/xataz/dockerfiles/tree/master/drone-docker/Dockerfile)
-* 1.11.2, 1.11 [(Dockerfile)](https://github.com/xataz/dockerfiles/tree/master/drone-docker/Dockerfile)
-* 1.10.3, 1.10 [(Dockerfile)](https://github.com/xataz/dockerfiles/tree/master/drone-docker/Dockerfile)
-* 1.9.1, 1.9 [(Dockerfile)](https://github.com/xataz/dockerfiles/tree/master/drone-docker/Dockerfile)
+* latest, 1.13.1, 1.13 [(Dockerfile)](https://github.com/xataz/dockerfiles/tree/master/drone-docker/Dockerfile)
 
 ## Description
-What is [Drone.io](https://github.com/drone/drone)?
+What is [docker-client](https://github.com/xataz/dockerfiles/tree/master/docker-client/)
 
-Drone is a Continuous Integration platform built on container technology. Every build is executed inside an ephemeral Docker container, giving developers complete control over their build environment with guaranteed isolation.
-
-What is [drone-docker](https://github.com/xataz/dockerfiles/tree/master/drone-docker/)
-
-Drone-docker is a docker image, based on alpine 3.3 with all tools for build your image.
+docker-client is a docker image, based on alpine 3.5 with all tools for build your image.
 
 **This image not contains root process**
 
@@ -28,7 +21,7 @@ docker build -t xataz/drone-docker github.com/xataz/dockerfiles.git#master:drone
 
 ## Configuration
 ### Build arguments
-* DOCKER_VER : Docker version (default : 1.11.2)
+* DOCKER_VER : Docker version (default : 1.13.1)
 
 
 ## Usage

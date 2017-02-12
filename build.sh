@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO='https://labs.xataz.net/xataz/dockerfiles.git'
+REPO='https://github.com/xataz/dockerfiles.git'
 BRANCH='master'
 USER='xataz'
 DOCKER_PUSH=$1
