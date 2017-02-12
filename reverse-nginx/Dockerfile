@@ -70,6 +70,7 @@ RUN export BUILD_DEPS="build-base \
     && mkdir -p /tmp/go/bin \
     && export GOPATH=/tmp/go \
     && export GOBIN=$GOPATH/bin \
+    && git config --global http.https://gopkg.in.followRedirects true \
     && go get github.com/xenolf/lego \
     && mv /tmp/go/bin/lego /usr/local/bin/lego \
     && apk del ${BUILD_DEPS} \
