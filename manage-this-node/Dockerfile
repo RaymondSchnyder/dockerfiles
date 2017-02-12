@@ -1,9 +1,9 @@
 FROM xataz/node:7
-MAINTAINER xataz <https://github.com/xataz>
 
 LABEL Description="manage-this-node based on alpine" \
       tags="latest" \
-      build_ver="2017010901"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 RUN BUILD_DEPS="git \
                 ca-certificates" \
