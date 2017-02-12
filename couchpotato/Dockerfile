@@ -1,5 +1,4 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz>
 
 ENV WEBROOT="" \
     UID=991 \
@@ -7,7 +6,8 @@ ENV WEBROOT="" \
 
 LABEL description="Couchpotato based on alpine" \
       tags="latest" \
-      build_ver="2016110801"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 RUN export BUILD_DEPS="py2-pip \
                     build-base \
