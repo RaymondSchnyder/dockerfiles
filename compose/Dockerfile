@@ -1,14 +1,14 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz>
 
-ARG COMPOSE_VER=1.10.0
+ARG COMPOSE_VER=1.11.1
 
 ENV UID=991 \
     GID=991
 
 LABEL description="docker-compose based on alpine" \
-      tags="latest 1.10.0 1.10 1" \
-      build_ver="2017012301"
+      tags="latest 1.11.1 1.11 1" \
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 COPY startup /usr/local/bin/startup
 
