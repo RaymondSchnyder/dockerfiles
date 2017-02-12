@@ -1,9 +1,9 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz/>
 
 LABEL description="cardigann based on alpine" \
       tags="1.9.4 1.9 1 latest" \
-      build_ver="2017010801"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 ARG CARDIGANN_VER=1.9.4
 
