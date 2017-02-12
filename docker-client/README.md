@@ -11,13 +11,10 @@ What is [docker-client](https://github.com/xataz/dockerfiles/tree/master/docker-
 
 docker-client is a docker image, based on alpine 3.5 with all tools for build your image.
 
-**This image not contains root process**
-
 ## Build Image
 ```shell
 docker build -t xataz/drone-docker github.com/xataz/dockerfiles.git#master:drone-docker
 ```
-
 
 ## Configuration
 ### Build arguments

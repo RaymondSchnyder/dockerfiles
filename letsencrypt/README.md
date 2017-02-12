@@ -5,7 +5,7 @@
 > If you don't trust, you can build yourself.
 
 ## Tag available
-* latest, 0.9.3, 0.9 [(Dockerfile)](https://github.com/xataz/dockerfiles/tree/master/letsencrypt/Dockerfile)
+* latest, 0.11.1, 0.11 [(Dockerfile)](https://github.com/xataz/dockerfiles/tree/master/letsencrypt/Dockerfile)
 
 ## Description
 What is [letsencrypt](https://github.com/certbot/certbot) ?
@@ -26,7 +26,7 @@ Until May 2016, Certbot was named simply letsencrypt or letsencrypt-auto, depend
 
 ## Build Image
 ### Build arguments
-* CERTBOT_VER : Version of certbot (default : v0.9.3)
+* CERTBOT_VER : Version of certbot (default : v0.11.1)
 
 ### Build
 ```shell
