@@ -1,5 +1,4 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz>
 
 ARG BUILD_CORES
 ARG MEDIAINFO_VER=0.7.92.1
@@ -14,7 +13,8 @@ ENV UID=991 \
 
 LABEL Description="rutorrent based on alpine" \
       tags="latest" \
-      build_ver="2017020601"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 RUN export BUILD_DEPS="build-base \
                         git \

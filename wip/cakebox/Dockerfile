@@ -1,5 +1,4 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz>
 
 ENV UID=991 \
     GID=991 \
@@ -9,7 +8,8 @@ ENV UID=991 \
 
 LABEL Description="cakebox based on alpine" \
       tags="latest" \
-      build_ver="2017020301"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 RUN export BUILD_DEPS="git \
                         make \

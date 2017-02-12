@@ -1,5 +1,4 @@
 FROM xataz/alpine:3.5
-MAINTAINER <https://github.com/xataz>
 
 ARG REDIS_VER=3.2.6
 
@@ -10,7 +9,8 @@ EXPOSE 6379
 
 LABEL description="redis based on alpine" \
       tags="latest stable 3.2.6 3.2 3" \
-      build_ver="2016123001"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 RUN export BUILD_DEPS="wget \
                     linux-headers \

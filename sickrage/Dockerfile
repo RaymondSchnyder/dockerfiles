@@ -1,9 +1,9 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz>
 
 LABEL description="sickrage based on alpine" \
       tags="latest" \
-      build_ver="2017012601"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 ENV WEBROOT="/" \
     UID="991" \

@@ -1,11 +1,11 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz>
 
 ARG RUNDECK_VER=2.7.1
 
 LABEL description="rundeck based on alpine" \
       tags="latest" \
-      build_ver="2016122301"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 ENV URI_ACCESS="http://localhost:4440" \
     ADMIN_PASSWORD="4dM!n" \
