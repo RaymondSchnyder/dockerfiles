@@ -1,11 +1,11 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz>
 
 LABEL Description="nginx based on alpine" \
-      tags="latest stable 1.10.2 1.10" \
-      build_ver="2017010901"
+      tags="latest stable 1.10.3 1.10" \
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
-ARG NGINX_VER=1.10.2
+ARG NGINX_VER=1.10.3
 ARG NGINX_GPG="B0F4253373F8F6F510D42178520A9993A1C052F8"
 ARG BUILD_CORES
 ARG NGINX_CONF="--prefix=/nginx \
