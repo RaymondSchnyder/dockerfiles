@@ -1,7 +1,6 @@
 FROM xataz/alpine:3.5
-MAINTAINER xataz <https://github.com/xataz>
 
-ARG GO_VER=1.7.4
+ARG GO_VER=1.7.5
 ARG GLIBC_VER=2.23-r3
 ARG GO_URL=https://storage.googleapis.com/golang/go${GO_VER}.linux-amd64.tar.gz
 ARG GLIBC_URL=https://github.com/andyshinn/alpine-pkg-glibc/releases/download/unreleased
@@ -10,10 +9,11 @@ ENV UID=991 \
     GID=991    
 
 LABEL description="Golang based on alpine" \
-      tags="latest 1.7.4 1.7 1" \
+      tags="latest 1.7.5 1.7 1" \
       glibc_ver="2.23-r3" \
-      golang_ver="1.7.4" \
-      build_ver="2016122801"
+      golang_ver="1.7.5" \
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 RUN BUILD_DEPS="wget \
                 tar \
