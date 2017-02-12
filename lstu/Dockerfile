@@ -19,7 +19,8 @@ RUN BUILD_DEPS="build-base \
                 tar \
                 perl-dev \
                 libidn-dev \
-                wget" \
+                wget \
+                postgresql-dev" \
     && apk add -U ${BUILD_DEPS} \
                 libressl \
                 perl \
