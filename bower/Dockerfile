@@ -1,12 +1,12 @@
 FROM xataz/node:7
-MAINTAINER xataz <https://github.com/xataz>
 
 ENV UID=991 \
     GID=991
 
 LABEL description="bower based on alpine" \
       tags="latest" \
-      build_ver="2016122701"
+      maintainer="xataz <https://github.com/xataz>" \
+      build_ver="2017021201"
 
 COPY startup /usr/local/bin/startup
 
