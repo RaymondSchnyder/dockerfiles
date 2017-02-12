@@ -1,6 +1,6 @@
 FROM xataz/alpine:3.5
 
-ARG REDIS_VER=3.2.6
+ARG REDIS_VER=3.2.8
 
 ENV UID=991 \
     GID=991
@@ -8,7 +8,7 @@ ENV UID=991 \
 EXPOSE 6379
 
 LABEL description="redis based on alpine" \
-      tags="latest-cli stable-cli 3.2.6-cli 3.2-cli 3-cli" \
+      tags="latest-cli stable-cli 3.2.8-cli 3.2-cli 3-cli" \
       maintainer="xataz <https://github.com/xataz>" \
       build_ver="2017021201"
 
