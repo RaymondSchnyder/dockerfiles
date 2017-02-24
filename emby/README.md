@@ -18,7 +18,7 @@ It features a REST-based API with built-in documention to facilitate client deve
 ## Build Image
 
 ```shell
-docker build -t xataz/emby github.com/RaymondSchnyder/dockerfiles.git#master:emby
+docker build -t raysh/emby github.com/RaymondSchnyder/dockerfiles.git#master:emby
 ```
 
 ## Configuration
